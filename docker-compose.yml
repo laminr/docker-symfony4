@@ -11,8 +11,8 @@ services:
       volumes:
         - .:/application
       environment:
-        - MYSQL_ROOT_PASSWORD=dbrootpw
-        - MYSQL_DATABASE=docker_symfony4
+        - MYSQL_ROOT_PASSWORD=dbroot
+        - MYSQL_DATABASE=mydb
         - MYSQL_USER=dbuser
         - MYSQL_PASSWORD=dbpw
       ports:
@@ -36,3 +36,13 @@ services:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      links:
+        - mysql
+      ports:
+        - 8181:80
+      environment:
+        PMA_HOST: mysql
+        PMA_PORT: 3306
+        MYSQL_ROOT_PASSWORD: dbroot
