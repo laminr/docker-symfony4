@@ -1,0 +1,16 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12 m8 l6">
+            <h1>Source creation</h1>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input class="btn right" type="submit" value="Create"/>
+            {{ form_end(form) }}
+
+            <a class="btn left" href="{{ path('source_index') }}">Back to the list</a>
+        </div>
+    </div>
+{% endblock %}

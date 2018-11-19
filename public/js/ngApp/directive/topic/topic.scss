@@ -1,0 +1,51 @@
+@import "../../../../css/sass/variables";
+
+eb-topic {
+
+  h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  #topic__questions {
+    padding-top: 25px;
+  }
+
+  .next {
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .topic__action {
+    cursor: pointer;
+  }
+
+  #topic__action {
+    float: right;
+    span + span {
+      margin-left: 15px;
+    }
+  }
+
+  #follow-up {
+    margin-top: 15px;
+    float: right;
+  }
+
+  #follow__stats {
+    float: left;
+    margin-top: 10px;
+    font-size: 1.3em;
+    
+    .follow__stats--gw {
+      display: inline-block;
+      
+      i {
+        float: left;
+        margin-top: 2px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

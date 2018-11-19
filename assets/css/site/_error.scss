@@ -1,0 +1,17 @@
+@import "../variables";
+
+#error-page {
+  background: #30323e;
+  text-align: center;
+  color: white;
+
+  img {
+    width: 100%;
+  }
+
+  main {
+    height: 400px;
+    margin-top: 50px;
+    padding: 50px;
+  }
+}

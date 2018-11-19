@@ -1,0 +1,101 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block pageId "admin-question-show" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+
+            <h1>Question</h1>
+
+            <div class="row">
+                <div class="col s12">
+                    <div>{{ question.topic.subject.name }}</div>
+                    {{ question.topic.name }}
+
+                    {% for tag in question.tags %}
+                        <span class="right tag">
+                            #{{ tag }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s6">chapter: {{ question.chapter }}</div>
+                <div class="col s6">Img: {{ question.refImg }}</div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    {{ question.label | raw }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    {{ question.explain | raw }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    {% for a in question.answers %}
+                        <div class="answer">
+                            <div>
+                                {% set isGood = a.good == true ? 'answer--true' : 'answer--false' %}
+                                <span class="{{ isGood }} checkbox"></span>
+                            </div>
+                            <div>
+                                {{ a.value }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    {% if question.refImg is not empty %}
+                        {% set imgs = question.refImg | split('|') %}
+                        {% for img in imgs %}
+                            <img src="{{ asset('img/questions/' ~ img) }}" alt="img_{{ img }}">
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12">
+                    <a class="btn left" href="{{ path('_admin-question_index') }}">Back to the list</a>
+                    <a class="btn right" href="{{ path('question_edit', { 'id': question.id }) }}">Edit</a>
+                    <a class="btn right" href="{{ path('question_new', { 'from': question.id }) }}">Copy</a>
+
+                    <button class="btn left red accent-4" data-target="confirm-delete">DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-delete" class="modal">
+        <div class="modal-content">
+            <h2>Really want to delete it ?</h2>
+            <p>
+                {{ question.label | raw }}
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect btn red accent-4">Nooooo !!!!</a>
+            {{ form_start(delete_form) }}
+            <input class="btn left btn-flat" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}

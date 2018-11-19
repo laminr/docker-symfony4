@@ -1,0 +1,76 @@
+// https://coolors.co/002642-840032-e59500-e5dada-02040f
+
+//$color-black: rgba(12, 18, 12, 1);
+//$color-black: rgba(52, 43, 46, 1);
+//$color-black: #332d33;
+$color-black: #30323e;
+$color-red: #C20114;
+$color-grey: rgba(109, 114, 117, 1);
+$color-blue-light: rgba(199, 214, 213, 1);
+$color-white-salmon: #ECEBF3;
+
+$color-green: #26a69a;
+$color-yellow: #f9b800;
+
+$body-color: $color-white-salmon;
+$true-color: $color-green;
+$false-color: $color-red;
+
+$primary: $color-black;
+$secondary: $color-red;
+
+$color-accent: $color-grey;
+$color-accent-second: $color-yellow;
+
+$color-primary-light: lighten($primary, 10%);
+$color-primary: $primary;
+$color-primary-dark: darken($primary, 5%);
+$color-primary-darker: darken($primary, 10%);
+
+$color-secondary-light: lighten($secondary, 5%);
+$color-secondary: $secondary;
+$color-secondary-dark: darken($secondary, 5%);
+$color-secondary-darker: darken($secondary, 10%);
+
+$color-footer: $color-secondary-dark;
+
+$font-poiret: 'Poiret One', cursive;
+$font-lato: 'Lato', sans-serif;
+$font-bold: 'Anton', sans-serif;
+$font-cursive: 'Tangerine', cursive;
+
+$font-family-title: $font-poiret;
+
+$header-height: 50px;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+
+$size-card: (
+    height: 250px, width: 420px
+);
+
+@mixin box-shadow($x, $y, $blur, $spread, $color) {
+  -webkit-box-shadow: inset $x $y $blur $spread $color;
+  -moz-box-shadow:    inset $x $y $blur $spread $color;
+  -o-box-shadow:      inset $x $y $blur $spread $color;
+  box-shadow:         inset $x $y $blur $spread $color;
+  filter:progid:DXImageTransform.Microsoft.Shadow(color=#{$color}, Direction=134, Strength=#{$blur});
+}
+
+@mixin box-shadow-button {
+  @include box-shadow(0px, 0px, 5px, 0px, $color-grey-light);
+}
+
+@mixin atpl-shape {
+  border: 1px solid darken($body-color, 10%);
+  background: lighten($body-color, 5%);
+  padding: 5px;
+  @include border-radius(2px);
+  margin-bottom: 10px;
+}

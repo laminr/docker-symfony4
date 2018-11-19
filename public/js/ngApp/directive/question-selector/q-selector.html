@@ -1,0 +1,51 @@
+<div class="row">
+    <select class="browser-default col s12 m4" name="source" id="source"
+            ng-options="source.name for source in ctrl.filters.sources track by source.id"
+            ng-model="ctrl.data.source"
+            ng-change="ctrl.change(ctrl.type.subject)"></select>
+    <select class="browser-default col s12 m4" name="subject" id="subject"
+            ng-options="source.name for source in ctrl.filters.subjects track by source.id"
+            ng-model="ctrl.data.subject"
+            ng-change="ctrl.change(ctrl.type.topic)"></select>
+    <select class="browser-default col s12 m4" name="topic" id="topic"
+            ng-options="source.name for source in ctrl.filters.topics track by source.id"
+            ng-model="ctrl.data.topic"></select>
+
+
+    <div class="row">
+        <span>
+            <input
+                    class="with-gap"
+                    name="tag"
+                    id="tag_a"
+                    type="radio"
+                    ng-click="ctrl.tag = ''"/>
+
+            <label for="tag_a">None</label>
+        </span>
+
+        <span ng-repeat="tag in ctrl.tags track by $index">
+            <input
+                    class="with-gap"
+                    name="tag"
+                    id="tag_{{$index}}"
+                    type="radio"
+                    value="{{tag}}"
+                    ng-click="ctrl.tag = tag"/>
+
+            <label for="tag_{{$index}}">{{tag}}</label>
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="right">
+                <button class="btn btn-flat white-atpl" ng-click="ctrl.reset()"><i class="material-icons">cached</i>
+                </button>
+                <button class="btn btn-flat white-atpl" ng-click="ctrl.get()"><i class="material-icons">done</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

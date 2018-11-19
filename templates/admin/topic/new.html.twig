@@ -1,0 +1,17 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Topic creation</h1>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" class="btn right"/>
+            {{ form_end(form) }}
+
+            <a class="btn left" href="{{ path('topic_index') }}">Back to the list</a>
+
+        </div>
+    </div>
+{% endblock %}

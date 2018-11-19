@@ -1,0 +1,159 @@
+@import "../../../../css/sass/variables";
+
+eb-question {
+
+  border: 1px solid darken($body-color, 10%);
+  background: lighten($body-color, 5%);
+  @include border-radius(5px);
+
+  & > div {
+    padding: 20px;
+  }
+
+  .label {
+    font-size: 1.6em;
+    font-family: $font-lato;
+    line-height: 1.2em;
+    margin-bottom: 20px;
+
+    p {
+      margin-top: 0;
+    }
+
+    ul {
+      list-style-type: circle;
+      padding-left: 35px;
+      li {
+        list-style-type: circle;
+      }
+    }
+  }
+
+  .modal {
+    .title {
+      color: $color-secondary;
+      font-size: 2em;
+      padding: 8px;
+      background: #30323e;
+      border-radius: 3px;
+    }
+    .question-mark {
+      color: $color-accent-second;
+    }
+  }
+
+  .answer {
+
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    line-height: 1.1em;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    cursor: pointer;
+
+    border: 1px solid darken($body-color, 10%);
+    @include border-radius(3px);
+    background: $body-color;
+
+    &--took {
+      border: 2px solid darken($body-color, 30%);
+    }
+
+    & > div {
+      display: inline-block;
+      vertical-align: middle;
+
+      &:nth-child(1) {
+        width: 30px;
+      }
+      &:nth-child(2) {
+        width: calc(100% - 40px);
+      }
+    }
+
+    &--value {
+      //margin-left: 20px;
+    }
+
+    & .checkbox {
+
+      display: inline-block;
+
+      &--empty {
+        border: 2px solid black;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        float: left;
+        //margin-top: 7px;
+      }
+    }
+
+    .checkbox--empty.ng-hide
+    + .answer--true
+    + .answer--value {
+      color: $color-green;
+    }
+
+    &--true {
+      top: -4px;
+      left: -5px;
+      width: 12px;
+      height: 22px;
+      border-top: 2px solid transparent;
+      border-left: 2px solid transparent;
+      border-right: 2px solid #26a69a;
+      border-bottom: 2px solid #26a69a;
+      -webkit-transform: rotate(40deg);
+      transform: rotate(40deg);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform-origin: 100% 100%;
+      transform-origin: 100% 100%;
+    }
+
+    &--false {
+
+      position: relative;
+      margin-right: 13px;
+
+      &::before {
+        position: absolute;
+        content: ' ';
+        top: -7px;
+        left: -2px;
+        width: 25px;
+        height: 25px;
+        border-top: 2px solid transparent;
+        border-left: 2px solid $false-color;
+        border-right: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+      }
+
+      &::after {
+        position: absolute;
+        content: ' ';
+        top: -25px;
+        right: -25px;
+        width: 25px;
+        height: 25px;
+        border-top: 2px solid transparent;
+        border-left: 2px solid transparent;
+        border-right: 2px solid $false-color;
+        border-bottom: 2px solid transparent;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+      }
+    }
+  }
+}

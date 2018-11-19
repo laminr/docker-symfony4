@@ -1,0 +1,37 @@
+<!--Shipping-->
+<div class="row">
+    <div class="col s12">
+        <div class="section--title">
+            <span class="step">2</span>
+            {{ ::ctrl.labels.shipping.title }}
+        </div>
+    </div>
+    <div class="col s12 m8 offset-m4">
+        <div ng-if="ctrl.cart.shippingParam == ctrl.shippingType.quote">
+            <div id="cart__shipping--quote" class="right">
+                {{ ctrl.labels.shipping.quote }}
+                <div class="small">{{ctrl.labels.shipping.contact}}</div>
+            </div>
+        </div>
+        <div ng-if="ctrl.cart.shippingParam == ctrl.shippingType.free">
+            <span class="right">{{ ctrl.labels.shipping.free }}</span>
+        </div>
+        <div ng-if="ctrl.cart.shippingParam == ctrl.shippingType.list">
+            <div ng-repeat="shipping in ctrl.cart.shippings">
+                <input id="shipping_{{shipping.id}}"
+                       class="with-gap"
+                       type="radio"
+                       name="shipping"
+                       ng-checked="{{ shipping.id == ctrl.cart.shipping.id }}"
+                       value="{{ ::shipping.id }}">
+                <label for="shipping_{{shipping.id}}"
+                       ng-click="ctrl.setShipping(shipping.set)"
+                       ng-class="{ active : shipping.id == ctrl.cart.shipping.id }"
+                       class="col s12">
+                    <span>{{shipping.label}}</span>
+                    <span class="right">{{ shipping.currency }} {{ shipping.value | number }}</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

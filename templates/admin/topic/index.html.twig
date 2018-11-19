@@ -1,0 +1,37 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+        <div class="row">
+            <div class="col s12">
+                <h1>
+                    Topics list
+                    <a href="{{ path('topic_new') }}" class="btn right">+</a>
+                </h1>
+                {% set subject = "" %}
+                {% for topic in topics %}
+                    {% if topic.subject != subject %}
+                        <div class="row">
+                            <h2 class="col s12">
+                                {{ topic.subject }}
+                                <small>({{ topic.subject.source }})</small>
+                            </h2>
+                        </div>
+                        {% set subject = topic.subject %}
+                    {% endif %}
+                    <div class="row topic">
+                        <div class="col s1">{{ topic.id }}</div>
+                        <div class="col s11">
+                            <div class="right">
+                                <a href="{{ path('topic_show', { 'id': topic.id }) }}"><i
+                                            class="material-icons small">zoom_in</i></a>
+                                <a href="{{ path('topic_edit', { 'id': topic.id }) }}"><i class="material-icons small">mode_edit</i></a>
+                            </div>
+                            {{ topic.name }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+{% endblock %}

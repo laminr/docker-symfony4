@@ -1,0 +1,40 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+        <div class="row">
+            <div class="col s12">
+                <h1>Answer</h1>
+
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ answer.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Value</th>
+                        <td>{{ answer.value }}</td>
+                    </tr>
+                    <tr>
+                        <th>Good</th>
+                        <td>{% if answer.good %}Yes{% else %}No{% endif %}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ul>
+                    <li>
+                        <a href="{{ path('answer_index') }}">Back to the list</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('answer_edit', { 'id': answer.id }) }}">Edit</a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+{% endblock %}

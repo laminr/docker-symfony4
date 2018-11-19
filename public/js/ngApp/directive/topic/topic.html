@@ -1,0 +1,73 @@
+<div>
+
+    <a href="{{ ctrl.subjectUrl() }}">
+        <h1>{{ctrl.topic.subject.name}}</h1>
+    </a>
+
+    <h2>
+        <!--<button class="btn left primary-atpl" ng-show="ctrl.topic.previous" ng-click="ctrl.nextTopic(-1)"><</button>-->
+        {{ ctrl.topic.name }}
+        <!--<button class="btn right primary-atpl" ng-show="ctrl.topic.next" ng-click="ctrl.nextTopic(1)">></button>-->
+    </h2>
+    <div id="topic__questions" class="row">
+        <span class="topic__action" ng-click="ctrl.shuffleQuestions()">
+            <i class="material-icons">shuffle</i>
+        </span>
+        <span ng-if="ctrl.url.focus" id="topic__action">
+            <span class="topic__action" ng-click="ctrl.saveFocus(0)">
+                <i class="material-icons {{ ctrl.active.focus == false ? 'color-accent-secondary' : ''}}">visibility_off</i>
+            </span>
+            <span class="topic__action" ng-click="ctrl.saveFocus(1)">
+                <i class="material-icons {{ ctrl.active.focus == true ? 'color-accent-secondary' : ''}}">star</i>
+            </span>
+        </span>
+        <div ng-if="ctrl.async">
+            <eb-question class="col s12" is-admin="ctrl.isAdmin" question="ctrl.active" show="ctrl.show" answer="ctrl.answer"></eb-question>
+        </div>
+        <div ng-if="!ctrl.async">
+            <div ng-repeat="question in ctrl.topic.questions">
+                <eb-question class="col s12"
+                             is-admin="ctrl.isAdmin"
+                             ng-show="ctrl.active.id == question.id"
+                             question="::question"
+                             show="ctrl.show"
+                             answer="ctrl.answer"
+                ></eb-question>
+            </div>
+        </div>
+
+        <div ng-if="ctrl.active.follow" id="follow__stats">
+            <div class="follow__stats--gw">
+                <i class="material-icons" ng-class="{ 'color-accent-secondary' : ctrl.active.follow.good > ctrl.active.follow.wrong }">thumb_up</i> {{ ctrl.active.follow.good }}
+            </div>
+            <div class="follow__stats--gw">
+                <i class="material-icons" ng-class="{ 'color-accent-secondary' : ctrl.active.follow.good < ctrl.active.follow.wrong }">thumb_down</i> {{ ctrl.active.follow.wrong }}
+            </div>
+        </div>
+        <span ng-if="ctrl.url.follow" id="follow-up" class="switch">
+            Follow-up:
+            <label>
+                <input type="checkbox" ng-model="ctrl.follow">
+                <span class="lever"></span>
+            </label>
+        </span>
+    </div>
+    <div class="row next">
+        <div class="col s12 m8 l6 offset-m2 offset-l3">
+            <loader ng-show="ctrl.loading.left" class="left"></loader>
+            <button ng-show="ctrl.index > 0 && !ctrl.loading.left" class="left btn accent-atpl"
+                    ng-click="ctrl.next(-1)"><
+            </button>
+            {{ (ctrl.index + 1) }} / {{ ctrl.topic.questions.length }}
+            <button ng-show="ctrl.index + 1 < ctrl.topic.questions.length && !ctrl.loading.right"
+                    class="right btn accent-atpl" ng-click="ctrl.next(1)">>
+            </button>
+            <button ng-show="ctrl.index + 1 == ctrl.topic.questions.length && ctrl.follow && ctrl.answer != null && !ctrl.loading.right && !ctrl.done"
+                    class="right btn accent-atpl" ng-click="ctrl.next(0)">
+                <i class="material-icons color-accent-secondary">done</i>
+            </button>
+            <loader ng-show="ctrl.loading.right" class="right"></loader>
+            <i ng-show="ctrl.done && !ctrl.loading.right" class="right material-icons color-accent-secondary">done</i>
+        </div>
+    </div>
+</div>

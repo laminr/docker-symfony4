@@ -1,0 +1,83 @@
+<div class="section--title">
+    <span class="step">1</span>
+    {{ ::ctrl.labels.title }}
+</div>
+
+<div id="cart__sumup--title" class="row hide-on-small-only">
+    <div class="col m6 l6"></div>
+    <div class="col m2 l2 center">{{ ::ctrl.labels.price.title }}</div>
+    <div class="col m2 l2 center">{{ ::ctrl.labels.qty }}</div>
+    <div class="col m2 l2 center">{{ ::ctrl.labels.total.th }}</div>
+</div>
+<div class="row" ng-repeat="article in ctrl.cart.product">
+    <div class="col s12 m2 l2">
+        <div class="img-container__80">
+            <a id="article__image" href="{{ ctrl.imgUrl(article.img, true) }}"
+               data-title="{{ article.name }}"
+               data-lightbox="{{ article.name }}">
+                <img ng-src="{{ ctrl.imgUrl(article.img, false) }}" alt="{{ ::article.name }}">
+            </a>
+        </div>
+    </div>
+    <div class="col s12 m4 l4 cart__sumup--name">
+        <h2>
+            <a href="{{ article.url.detail }}">
+                {{ ::article.name }}
+            </a>
+        </h2>
+        <div ng-repeat="charact in article.charact">
+            <div ng-bind-html="ctrl.renderHtml(charact)"></div>
+        </div>
+    </div>
+    <div class="col s4 m2 l2 center cart__sumup--priceQty">
+        <div ng-if="article.price.value == -1">
+            <div class="accent">
+                {{ ::ctrl.labels.price.contact_us }}
+            </div>
+        </div>
+        <div ng-if="article.price.value > -1">
+            <div class="hide-on-med-and-up">{{ ::ctrl.labels.price.title }}</div>
+            {{ ::article.price.currency }} {{ ::article.price.value | number }}
+        </div>
+    </div>
+    <div class="col s4 m2 l2 center cart__sumup--priceQty">
+        <div class="add--qty">
+            <button ng-click="ctrl.add(article.url.del)">-</button>
+            <span>{{ article.qty }}</span>
+            <button ng-click="ctrl.add(article.url.add)">+</button>
+        </div>
+    </div>
+    <div class="col s4 m2 l2 right-align cart__sumup--priceQty">
+        <div ng-if="article.price.value == -1">
+            <div class="accent">
+                {{ ::ctrl.labels.price.contact_us }}
+            </div>
+        </div>
+        <div ng-if="article.price.value > -1">
+            <div class="hide-on-med-and-up">{{ ::ctrl.labels.total.th }}</div>
+            {{ article.price.currency }} {{ article.price.value * article.qty | number }}
+        </div>
+    </div>
+</div>
+<div id="cart__sumup--subtotal" class="row">
+    <div class="col s12">
+        <div class="sub-title cart__sumup--priceTotal">
+            <span>
+                {{ ctrl.labels.total.sub }} (
+                    {{ ctrl.cart.total }}
+                    <span ng-if="ctrl.cart.total == 1">{{ ctrl.labels.item }}</span>
+                    <span ng-if="ctrl.cart.total != 1">{{ ctrl.labels.items }}</span>
+                ) :
+            </span>
+            <span ng-if="ctrl.contactNeeded && ctrl.total.sub == 0" class="right accent">
+                {{ ::ctrl.labels.price.contact_us }}
+            </span>
+            <span class="actual-price" ng-if="ctrl.total.sub > 0">
+                {{ ctrl.total.currency }} {{ ctrl.total.sub | number }}
+            </span>
+        </div>
+        <a href="{{ ctrl.url.terms }}" class="cart__sumup--priceTerm">
+            {{ ctrl.labels.read_terms }}
+        </a>
+    </div>
+</div>

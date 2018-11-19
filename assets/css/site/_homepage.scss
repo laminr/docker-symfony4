@@ -1,0 +1,79 @@
+@import "../variables";
+
+#homepage {
+
+  h1 {
+    font-size: 5em;
+    text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2em;
+    color: $color-accent;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  #opening {
+    text-align: justify;
+  }
+
+  #welcome {
+    font-family: $font-cursive;
+    font-size: 5em;
+    color: $color-grey;
+    text-shadow: 1px 1px 1px white;
+  }
+
+  #welcome-message {
+    font-size: 1.3em;
+    font-weight: 300;
+  }
+
+  #enjoy {
+    font-family: $font-cursive;
+    font-size: 2.5em;
+    color: $color-grey;
+    text-shadow: 1px 1px 1px white;
+    margin-right: 5px;
+    line-height: 0.8em;
+  }
+
+
+  #android-app {
+
+    margin-top: 20px;
+    font-size: 1.3em;
+    font-weight: 300;
+
+    #app-ico {
+      margin-top:20px;
+      border-radius: 5px;
+    }
+
+    img {
+      height: 45px;
+    }
+  }
+
+  section {
+
+    padding-top: 40px;
+
+    div {
+      @include border-radius(3px);
+      border: 1px solid darken($body-color, 10%);
+      background: lighten($body-color, 5%);
+      padding: 10px;
+      margin-bottom: 10px;
+
+      & > a {
+        width: 100%;
+        display: inline-block;
+      }
+    }
+  }
+}

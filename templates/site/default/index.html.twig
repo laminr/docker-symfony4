@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- https://cookieconsent.insites.com/ -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
+{% endblock %}
+
+{% block pageId "homepage" %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col s12 m6.offset-m3">
+                <h1>Aero Knowledge</h1>
+                <h2>
+                    <small>by</small>
+                    eventually business
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div id="opening" class="col s12 m6">
+                <div id="welcome">Welcome</div>
+                <div id="welcome-message">
+                    <p>
+                        Aero Knowledge is a platform created to compile and share Aviation knowledge in a progressive
+                        and Effective manner to all Aviation professionals
+                    </p>
+                    <p>
+                        The data showcased is a compilation from various sources (from the internet) and (contributed by
+                        aviation professionals) from across the world.
+                    </p>
+                </div>
+
+                <div id="android-app">
+                    <span id="enjoy">For you</span> to enjoy and practice on the go, Aero Knowledge is also available as
+                    an Android application
+                    <div>
+                        <a href="https://play.google.com/store/apps/details?id=biz.eventually.atpl.release"
+                           target="_blank">
+                            <img id="app-ico" src="{{ asset('img/aeroknow_app-64.png') }}"
+                                 alt="Aero Know Android App icone">
+                            <img src="{{ asset('img/google-play.png') }}" alt="Google Play">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <section class="col s12 m6">
+                <a href="{{ path('_review-question_index') }}" class="btn accent-atpl right">Review questions</a>
+                <h3>Subject</h3>
+                {% for source in sources %}
+                    <div><a href="{{ path('_source', {'id' : source.id}) }}">{{ source.name }}</a></div>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        // cookie banner
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#000"
+                    },
+                    "button": {
+                        "background": "#f1d600"
+                    }
+                },
+                "position": "bottom-right"
+            })
+        });
+    </script>
+{% endblock %}

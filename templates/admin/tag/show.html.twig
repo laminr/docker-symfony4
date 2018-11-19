@@ -1,0 +1,57 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Tag</h1>
+
+            <table>
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ tag.id }}</td>
+                </tr>
+                <tr>
+                    <th>Value</th>
+                    <td>{{ tag.value }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col s12">
+
+                    <a href="{{ path('tag_index') }}" class="btn left">Back to the list</a>
+                    <a href="{{ path('tag_edit', { 'id': tag.id }) }}" class="btn right">Edit</a>
+
+                    <button class="btn left red accent-4" data-target="confirm-delete">DELETE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-delete" class="modal">
+        <div class="modal-content">
+            <h2>Really want to delete it ?</h2>
+            <p>
+                {{ tag.value }}
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect btn red accent-4">Nooooo !!!!</a>
+            {{ form_start(delete_form) }}
+            <input class="btn left btn-flat" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}

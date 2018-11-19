@@ -1,0 +1,16 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12 m6">
+            <h1>Source edit</h1>
+
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Save" class="btn right"/>
+            {{ form_end(edit_form) }}
+
+            <a href="{{ path('source_index') }}" class="btn left">Back to the list</a>
+        </div>
+    </div>
+{% endblock %}

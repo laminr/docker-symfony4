@@ -1,0 +1,44 @@
+@import "../variables";
+
+.source, .topic, .subject, .question {
+  @include atpl-shape
+}
+
+h2 {
+  margin: 5px 0 0;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin: 5px 0 0;
+  padding-top: 0;
+  font-family: $font-family-title;
+  color: $color-secondary;
+}
+
+h4 {
+  font-size: 1em;
+  padding-top: 0;
+  margin: 5px 0 0;
+  font-family: $font-family-title;
+  color: $color-accent-second;
+  font-weight: bold;
+}
+
+.tag {
+  border: 1px solid $secondary;
+  border-radius: 2px;
+  padding: 0 5px;
+  color: $secondary;
+  background: lighten($secondary, 50%);
+}
+
+#admin-username {
+    text-transform: uppercase;
+    background: $color-black;
+    color: $body-color;
+    padding: 10px;
+    border-radius: 2px;
+    margin: 5px 0 0;
+}

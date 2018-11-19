@@ -6,13 +6,13 @@ services:
 
     mysql:
       image: mysql:8.0
-      container_name: docker-symfony4-mysql
+      container_name: atpl-mysql
       working_dir: /application
       volumes:
         - .:/application
       environment:
-        - MYSQL_ROOT_PASSWORD=dbrootpw
-        - MYSQL_DATABASE=docker_symfony4
+        - MYSQL_ROOT_PASSWORD=dbroot
+        - MYSQL_DATABASE=atpl_v2
         - MYSQL_USER=dbuser
         - MYSQL_PASSWORD=dbpw
       ports:
@@ -20,7 +20,7 @@ services:
 
     webserver:
       image: nginx:alpine
-      container_name: docker-symfony4-webserver
+      container_name: atpl-webserver
       working_dir: /application
       volumes:
           - .:/application
@@ -30,9 +30,20 @@ services:
 
     php-fpm:
       build: phpdocker/php-fpm
-      container_name: docker-symfony4-php-fpm
+      container_name: atpl-php-fpm
       working_dir: /application
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: atpl-phpmydamin
+      links:
+        - mysql
+      ports:
+        - 8181:80
+      environment:
+        PMA_HOST: mysql
+        PMA_PORT: 3306
+        MYSQL_ROOT_PASSWORD: dbroot

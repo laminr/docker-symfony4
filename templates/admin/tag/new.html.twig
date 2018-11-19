@@ -1,0 +1,20 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Tag creation</h1>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" />
+            {{ form_end(form) }}
+
+            <ul>
+                <li>
+                    <a href="{{ path('tag_index') }}">Back to the list</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

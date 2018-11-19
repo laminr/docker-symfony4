@@ -1,0 +1,61 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block pageId "admin-question" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Question edit</h1>
+
+            {{ form_start(edit_form) }}
+            {{ form_row(edit_form.topic) }}
+            {{ form_row(edit_form.label) }}
+            {{ form_row(edit_form.canonical, { 'attr': {'class': 'question__answers'} }) }}
+            {#{{ form_row(edit_form.chapter) }}#}
+            {{ form_row(edit_form.refImg) }}
+            {{ form_row(edit_form.explain) }}
+            {{ form_row(edit_form.tags) }}
+
+            <h2>Answers</h2>
+
+            <div class="row">
+                <div class="col s12">
+                    Symbol:
+                    <span>↗</span>
+                    <span>↘</span>
+                    <span>≥</span>
+                    <span>≤</span>
+                </div>
+            </div>
+
+            {% for answer in edit_form.answers %}
+                <div id="question__answers" class="row">
+                    <div class="col s8">
+                        {{ form_row(answer.value, { 'attr': {'class': 'question__answers'} }) }}
+                    </div>
+                    <div class="col s4">
+                        <div class="switch">
+                            <label>
+                                False
+                                {{ form_widget(answer.good) }}
+                                <span class="lever"></span>
+                                Good
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <input type="submit" value="Save" class="btn right"/>
+            {{ form_end(edit_form) }}
+
+            <a href="{{ path('_admin-question_index') }}" class="btn left">Back to the list</a>
+
+            {#{{ form_start(delete_form) }}#}
+            {#<input type="submit" value="Delete" class="btn right">#}
+            {#{{ form_end(delete_form) }}#}
+
+        </div>
+    </div>
+
+{% endblock %}

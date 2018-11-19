@@ -1,0 +1,31 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>
+                Sources list
+                <a href="{{ path('source_new') }}" class="btn right">+</a>
+            </h1>
+
+            {% for source in sources %}
+                <div class="row source">
+                    <div class="col s1">
+                        {{ source.id }}
+                    </div>
+                    <div class="col s11">
+                        <div class="right">
+                            <a href="{{ path('source_show', { 'id': source.id }) }}">
+                                <i class="material-icons small">zoom_in</i>
+                            </a>
+                            <a href="{{ path('source_edit', { 'id': source.id }) }}">
+                                <i class="material-icons small">mode_edit</i>
+                            </a>
+                        </div>
+                        {{ source.name }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

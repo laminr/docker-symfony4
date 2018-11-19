@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("build/admin.css") }}?v={{ version }}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+{% endblock %}
+
+{% block bodyContainer %}
+
+    {% block body %}{% endblock %}
+
+{% endblock %}

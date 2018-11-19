@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block pageId "review-question-show" %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col s12 l8 offset-l2">
+
+                <div class="row">
+                    <div class="col s12">
+                        <h1>{{ question.topic.subject.name }}</h1>
+                        <h2>{{ question.topic.name }}</h2>
+                    </div>
+                </div>
+
+                {% if question.chapter != "" %}
+                <div class="row">
+                    <div class="col s12">chapter: {{ question.chapter }}</div>
+                </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col s12 review__question-label">
+                        {{ question.label | raw }}
+                    </div>
+                </div>
+                {% if question.explain != "" %}
+                <div class="row">
+                    <div class="col s12">
+                        explain: {{ question.explain | raw }}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col s12">
+                        {% for a in question.answers %}
+                            <div class="answer">
+                                <div>
+                                    {% set isGood = a.good == true ? 'answer--true' : 'answer--false' %}
+                                    <span class="{{ isGood }} checkbox"></span>
+                                </div>
+                                <div>
+                                    {{ a.value }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        {% for img in question.imgsArray %}
+                            {% if img != "" %}
+                            <img src="{{ absolute_url(asset('img')) }}/questions/{{ img }}" alt="">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <a class="btn left" href="{{ path('_review-question_index') }}">Back to the list</a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('question_edit', {'id' : question.id }) }}" class="btn right" target="_blank">
+                        <i class="material-icons small">mode_edit</i>
+                    </a>
+
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}

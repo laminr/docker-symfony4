@@ -1,0 +1,39 @@
+<div class="row">
+    <a ng-if="ctrl.isAdmin" href="{{ctrl.urlEdit(ctrl.question.id)}}" target="_blank">
+        <i class="material-icons small left">mode_edit</i>
+    </a>
+    <!-- Modal Trigger -->
+    <a href="#explain_model" class="right" ng-if="ctrl.question.explain && ctrl.show">
+        <i class="material-icons">info_outline</i>
+    </a>
+    <div class="label" ng-bind-html="ctrl.renderHtml(ctrl.question.label)"></div>
+    <div class="answer col s12 m8 offset-m2"
+         ng-repeat="answer in ctrl.question.answers"
+         ng-click="ctrl.select(answer)"
+         ng-class="{ 'answer--took' : ctrl.show && answer == ctrl.answer }"
+    >
+        <div>
+            <span class="checkbox--empty" ng-hide="ctrl.show"></span>
+            <span class="{{ answer.good ? 'answer--true' : 'answer--false' }} checkbox" ng-show="ctrl.show"></span>
+        </div>
+        <div>
+            <span class="answer--value" ng-bind="::answer.value"></span>
+        </div>
+    </div>
+    <div class="col s12" ng-repeat="img in ctrl.splitImg()">
+        <div class="img-container__90">
+            <img ng-src="{{img}}">
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="explain_model" class="modal">
+    <div class="modal-content">
+        <div class="title">How<span class="question-mark">!</span></div>
+        <span class="" ng-bind-html="ctrl.renderHtml(ctrl.question.explain)"></span>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
+</div>

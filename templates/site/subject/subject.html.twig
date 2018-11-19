@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block pageId "subject" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
+                <section id="subject_{{ subject.id }}">
+                    <h1>{{ subject.name }}</h1>
+                    {% for topic in subject.topics %}
+                        <div>
+                            <a href="{{ path('_topic-question', {'id' : topic.id}) }}">
+                                {{ topic.name }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </section>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

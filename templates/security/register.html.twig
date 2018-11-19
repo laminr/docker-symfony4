@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'login' %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 offset-m3">
+                    {{ form_start(form) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+
+                    <button type="submit" class="btn right">Register!</button>
+                    {{ form_end(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

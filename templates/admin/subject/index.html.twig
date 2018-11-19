@@ -1,0 +1,41 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>
+                Subjects list
+                <a href="{{ path('subject_new') }}" class="btn right">+</a>
+            </h1>
+            {% set source = "" %}
+            {% for subject in subjects %}
+                {% if subject.source != source %}
+                    <div class="row">
+                        <h2 class="col s12">{{ subject.source }}</h2>
+                    </div>
+                    {% set source = subject.source %}
+                {% endif %}
+                <div class="row subject">
+                    <div class="col s1">{{ subject.id }}</div>
+                    <div class="col s11">
+                        <div class="right">
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                {% if subject.authorisedAdmins is not empty %}
+                                    <span>{{ subject.authorisedAdmins | length }} admins</span>
+                                {% endif %}
+                            {% endif %}
+                            <a href="{{ path('subject_show', { 'id': subject.id }) }}">
+                                <i class="material-icons small">zoom_in</i>
+                            </a>
+                            <a href="{{ path('subject_edit', { 'id': subject.id }) }}">
+                                <i class="material-icons small">mode_edit</i>
+                            </a>
+                        </div>
+                        {{ subject.name }}
+                        {% if not subject.public %} <span class="color-accent-secondary">[private]</span> {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

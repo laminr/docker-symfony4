@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block pageId "subject" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col s12">
+                {% for subject in subjects %}
+                    <section id="subject_{{ subject.id }}">
+                        <h1>{{ subject.name }}</h1>
+                        {% for topic in subject.topics %}
+                            <div class="subject__container">
+                                <div class="stats__container">
+                                    {% if topic.follow != topic.questions %}
+                                    <span class="stats">
+                                        <span class="__color-accent-secondary color-secondary">&Sigma;</span>: {{ topic.questions }}
+                                    </span>
+                                    {% endif %}
+                                    <span class="stats">
+                                    {% if topic.follow %}
+                                        {{ topic.follow }}
+                                        <i class="material-icons __color-accent-secondary">done</i>
+                                    {% endif %}
+                                    </span>
+                                    {% if topic.focus %}
+                                        <a class="stats star" href="{{ path('_topic-question-star', {'id' : topic.id}) }}">
+                                            {{ topic.focus }}
+                                            <i class="material-icons color-accent-secondary">star</i>
+                                        </a>
+                                    {% endif %}
+                                    {% if topic.meanDone %}
+                                        <span class="stats max_done">
+                                            [&mu;: {{ topic.meanDone }}]
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <a href="{{ path('_topic-question', {'id' : topic.id}) }}">
+                                    {{ topic.name }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block pageId "admin-question" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <h1>Question creation</h1>
+            <div ng-app="atpl">
+                <q-selector question="{{ absolute_url(path('question_new')) }}"
+                            filter="{{ absolute_url(path('_admin-question_filter')) }}"></q-selector>
+            </div>
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.topic) }}
+            {{ form_row(form.label) }}
+            {{ form_row(form.canonical) }}
+            {#{{ form_row(form.chapter) }}#}
+            {{ form_row(form.refImg) }}
+            {{ form_row(form.explain) }}
+            {{ form_row(form.tags) }}
+
+            <h2>Answers</h2>
+
+            <div class="row">
+                <div class="col s12">
+                    Symbol:
+                    <span>↗</span>
+                    <span>↘</span>
+                    <span>≥</span>
+                    <span>≤</span>
+                </div>
+            </div>
+
+            {% set randomA = random(3) %}
+            {% for answer in form.answers %}
+                <div id="question__answers" class="row">
+                    <div class="col s8">
+                        {{ form_row(answer.value) }}
+                    </div>
+                    <div class="col s4">
+                        <div class="switch">
+                            <label>
+                                False
+                                {{ form_widget(answer.good) }}
+                                <span class="lever"></span>
+
+                                {% if loop.index0 == randomA %}
+                                    <span class="color-accent-secondary">Good</span>
+                                {% else %}
+                                    Good
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {#{% for answer in form.answers %}#}
+            {#<li>{{ form_widget(answer) }}</li>#}
+            {#{% endfor %}#}
+
+            <input class="btn right" type="submit" value="Create"/>
+            {{ form_end(form) }}
+
+            <a class="btn left" href="{{ path('_admin-question_index') }}">Back to the list</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var $collectionHolder;
+
+        // setup an "add a tag" link
+        var $addTagLink = $('<a href="#" class="add_answer_link">Add an Answer</a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function () {
+            // Get the ul that holds the collection of answer
+            $collectionHolder = $('ul.answer');
+
+            // add the "add a tag" anchor and li to the answer ul
+            $collectionHolder.append($newLinkLi);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addTagLink.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addTagForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+{% endblock %}

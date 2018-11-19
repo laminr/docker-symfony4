@@ -1,0 +1,35 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+
+            <h1>Subject edit</h1>
+            {{ form_start(edit_form) }}
+
+            {{ form_row(edit_form.source) }}
+            {{ form_row(edit_form.name) }}
+            <div class="switch">
+                <label>
+                    Private
+                    {{ form_widget(edit_form.public) }}
+                    <span class="lever"></span>
+                    Public
+                </label>
+            </div>
+            {{ form_row(edit_form.authorisedUsers) }}
+
+            {% if not is_granted('ROLE_SUPER_ADMIN') %}
+                {% do edit_form.authorisedAdmins.setRendered %}
+            {% endif %}
+
+            {{ form_widget(edit_form) }}
+            <input type="submit" value="Save" class="btn right"/>
+            {{ form_end(edit_form) }}
+
+            <a href="{{ path('subject_index') }}" class="btn left">Back to the list</a>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block pageId "review-question" %}
+
+{% block body %}
+    <main class="container">
+
+        <div class="row" ng-app="atpl">
+            <h1>
+                Questions list
+                <small>({{ count }} questions)</small>
+            </h1>
+
+            <div>
+                <q-selector question="{{ absolute_url(path('_review-question_index')) }}"
+                            filter="{{ absolute_url(path('_review-question_filter')) }}"></q-selector>
+            </div>
+
+            {% set source = "" %}
+            {% set subject = "" %}
+            {% set topic = "" %}
+            {% for question in questions %}
+                {% if question.topic.subject.source != source %}
+                    <div class="row">
+                        <h2 class="col s12">{{ question.topic.subject.source }}</h2>
+                        {% if question.topic.subject != subject %}
+                            <h3 class="col s12">{{ question.topic.subject }}</h3>
+                            {% set subject = question.topic.subject %}
+                        {% endif %}
+                        {% if question.topic != topic %}
+                            <h4 class="col s12">{{ question.topic.name }}</h4>
+                            {% set topic = question.topic %}
+                        {% endif %}
+                    </div>
+                    {% set source = question.topic.subject.source %}
+                {% elseif question.topic.subject != subject %}
+                    <div class="row">
+                        <h3 class="col s12">{{ question.topic.subject }}</h3>
+                        {% if question.topic != topic %}
+                            <h4 class="col s12">{{ question.topic.name }}</h4>
+                            {% set topic = question.topic %}
+                        {% endif %}
+                    </div>
+                    {% set subject = question.topic.subject %}
+                {% elseif question.topic != topic %}
+                    <div class="row">
+                        <h4 class="col s12">{{ question.topic.name }}</h4>
+                    </div>
+                    {% set topic = question.topic %}
+                {% endif %}
+                <div class="row question">
+                    <div class="col s1">
+                        <a href="{{ path('_review-question_show', { 'id': question.id }) }}">{{ question.id }}</a>
+                    </div>
+                    <div class="col s11">
+                        <div class="right">
+                            <a href="{{ path('_review-question_show', { 'id': question.id }) }}"><i
+                                        class="material-icons small">zoom_in</i></a>
+                        </div>
+                        {{ question.label | raw }}
+                        <div>
+                            <div>{{ question.chapter }}</div>
+                            <div>{{ question.refImg }}</div>
+                        </div>
+                    </div>
+                    {#<div class="col s8">{{ question.explain }}</div>#}
+                </div>
+
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

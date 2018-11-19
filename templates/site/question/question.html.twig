@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block pageId "question" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <main class="container" ng-app="atpl">
+        <div class="row">
+            <div class="col s12">
+                <eb-topic async="{{ async }}" is-admin="{{ is_granted('ROLE_ADMIN') }}"></eb-topic>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        var data = {{ topic | json_encode | raw }};
+        path.source = "{{ absolute_url(path('_source', {'id' : "sourceId"})) }}";
+        path.topic = "{{ absolute_url(path('_topic-question', {'id' : "topicId"})) }}";
+        path.question = "{{ absolute_url(path('_api-question', {'id' : "questionId"})) }}";
+        path.img = "{{ absolute_url(asset('img/questions')) }}";
+        path.edit = "{{ path('question_edit', { 'id': 'questionId' }) }}";
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        path.focus = {
+            dont_care : "{{ absolute_url(path('_api-question-focus', {'id' : 'questionId', 'care' : 0})) }}",
+            important : "{{ absolute_url(path('_api-question-focus', {'id' : 'questionId', 'care' : 1 })) }}"
+        };
+
+        path.follow = "{{ absolute_url(path('_api-question-follow', {'id' : 'questionId', 'good' : 'good' })) }}";
+        {% endif %}
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.materialboxed').materialbox();
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}

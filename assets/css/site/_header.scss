@@ -1,0 +1,41 @@
+@import "../variables";
+
+header {
+  color: $body-color;
+
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  min-height: $header-height;
+  background: $color-primary;
+  vertical-align: middle;
+  border-bottom: 2px solid $color-secondary;
+  padding: 10px;
+
+  &.active {
+    box-shadow: 0 0 10px black;
+  }
+
+  a {
+    color: $body-color;
+  }
+
+  #menu-home {
+    padding-top: 5px;
+    float: left;
+
+    & > i {
+      float: left;
+      margin-top: 3px
+    }
+  }
+
+  #subject {
+    font-size: 1em;
+    font-weight: 400;
+    padding-top: 11px;
+    float: left;
+    margin-left: 15px;
+    font-family: $font-lato;
+  }
+}

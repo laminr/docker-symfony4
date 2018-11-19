@@ -1,0 +1,53 @@
+@import "../variables";
+
+#subject {
+
+  section {
+    .subject__container {
+      @include border-radius(3px);
+      border: 1px solid darken($body-color, 10%);
+      background: lighten($body-color, 5%);
+      padding: 10px;
+      margin-bottom: 10px;
+
+      position: relative;
+      & > a {
+        width: 100%;
+        display: inline-block;
+        padding-right: 140px;
+      }
+    }
+  }
+
+  .stats__container {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+  }
+
+  .stats {
+    float: right;
+    color: $color-accent; // to override link color as well
+
+    & > i {
+      float: left;
+      margin-top: -2px;
+      margin-right: 2px;
+    }
+
+    &.star {
+      & > i {
+        font-size: 1.5em;
+        margin-top: -1px;
+      }
+    }
+
+    & + .stats {
+      margin-right: 10px;
+    }
+
+    &.max_done {
+      color: darken($body-color, 15%);
+    }
+  }
+}

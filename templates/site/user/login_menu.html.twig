@@ -1,0 +1,20 @@
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <a href="#"
+       class="dropdown-button btn-flat atpl"
+       data-activates='customer_menu'>
+        {{ 'home.sign.logged' | trans({'%username%': app.user.username}) }}
+        <i class="material-icons right">keyboard_arrow_down</i>
+    </a>
+    <!-- Dropdown Structure -->
+    <ul id='customer_menu' class='dropdown-content'>
+        <li><a href="{{ path('fos_user_profile_show') }}">{{ 'home.profile.account' | trans }}</a></li>
+        <li>
+            <a href="{{ path('fos_user_security_logout') }}" title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}">
+                Log out <i class="tiny material-icons">exit_to_app</i>
+            </a>
+        </li>
+    </ul>
+{% else %}
+    {#<a href="{{ path('fos_user_security_login') }}" class="btn-flat atpl">{{ 'home.sign.in' | trans }}</a>#}
+    {#<a id="register" href="{{ path('fos_user_registration_register') }}">{{ 'home.sign.up' | trans }}</a>#}
+{% endif %}

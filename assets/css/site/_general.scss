@@ -1,0 +1,164 @@
+@import "../variables";
+
+.color-accent {
+  color: $color-accent;
+}
+
+.color-primary {
+  color: $color-primary
+}
+
+.color-secondary {
+  color: $color-secondary
+}
+
+.color-accent-secondary {
+  color: $color-accent-second;
+}
+
+.color-body {
+  color: $body-color;
+}
+
+.font-cursive {
+  font-family: $font-cursive;
+}
+
+main {
+  padding-top: $header-height;
+}
+
+body {
+  background-color: $body-color;
+  color: $color-primary;
+}
+
+a {
+  text-decoration: none !important;
+  color: $color-primary;
+}
+
+h1 {
+  font-size: 2em;
+  padding-top: 0;
+  font-family: $font-family-title;
+  color: $color-secondary;
+}
+
+h2 {
+  font-size: 1.5em;
+  padding-top: 0;
+  font-family: $font-family-title;
+  color: $color-secondary;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+button, a.btn, input.btn {
+
+  &-flat.atpl {
+    color: $color-accent-second;
+
+    &:hover {
+      background: $color-accent;
+    }
+  }
+
+  &.white-atpl {
+    border: 1px solid darken($body-color, 10%);
+    background: lighten($body-color, 5%);
+    color: $color-primary;
+  }
+
+  &.white-atpl:hover {
+    /*background-color: $color-primary;
+    color: $color-white;*/
+    background-color: $color-white-salmon;
+    border: 1px solid $color-primary;
+    color: $color-primary
+  }
+
+  &.primary-atpl {
+    background-color: $color-primary;
+  }
+  &.primary-atpl:hover {
+    background-color: $color-primary-darker;
+  }
+
+  &.secondary-atpl {
+    background-color: $color-secondary;
+  }
+
+  &.secondary-atpl:hover {
+    background-color: lighten($color-secondary, 10%);
+  }
+
+  &.accent-atpl {
+    background-color: $color-accent;
+  }
+
+  &.accent-atpl:hover {
+    background-color: lighten($color-accent, 10%);
+  }
+
+}
+
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid $color-secondary;
+  box-shadow: 0 1px 0 0 $color-secondary;
+}
+
+@mixin img-max-width($percent) {
+  &__#{$percent} {
+    width: #{$percent+"%"};
+    margin: 0 auto;
+    & img {
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
+.img-container {
+  @include img-max-width(50);
+  @include img-max-width(80);
+  @include img-max-width(90);
+  @include img-max-width(95);
+  @include img-max-width(100);
+}
+
+/* Surcharge materializecss */
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+  border-color: $color-secondary;
+}
+
+[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+  background-color: $color-secondary;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: $color-primary;
+}
+
+[type="checkbox"]:checked+label:before {
+  border-right-color: $color-secondary;
+  border-bottom-color: $color-secondary;
+}
+
+input:not([type]):focus:not([readonly])+label,
+input[type=text]:focus:not([readonly])+label,
+input[type=password]:focus:not([readonly])+label {
+  color: $color-secondary-light;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: $color-accent-second;
+
+  &:after {
+    background-color: $color-accent-second;
+  }
+}

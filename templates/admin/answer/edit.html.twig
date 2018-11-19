@@ -1,0 +1,25 @@
+{% extends 'admin/base_data.html.twig' %}
+
+{% block body %}
+        <div class="row">
+            <div class="col s12">
+                <h1>Answer edit</h1>
+
+                {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <input type="submit" value="Edit" />
+                {{ form_end(edit_form) }}
+
+                <ul>
+                    <li>
+                        <a href="{{ path('answer_index') }}">Back to the list</a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" value="Delete">
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+{% endblock %}
