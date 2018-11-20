@@ -40,7 +40,8 @@ Once you're done, simply `cd` to your project and run `docker-compose up -d`. Th
   * To clear images: `docker rmi -f $(docker images -a -q)`
   * To clear volumes: `docker volume rm $(docker volume ls -q)`
   * To clear networks: `docker network rm $(docker network ls | tail -n+2 | awk '{if($2 !~ /bridge|none|host/){ print $1 }}')`
-
+  * To connect to container: `docker exec -it <container name> /bin/bash`
+  * Get docker container name: `docker ps --format "{{.Names}}"`
 
 
 Disclaimer: This project has been generated on phpdocker.io
