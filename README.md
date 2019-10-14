@@ -43,6 +43,9 @@ Once you're done, simply `cd` to your project and run `docker-compose up -d`. Th
   * To connect to container: `docker exec -it <container name> /bin/bash`
   * Get docker container name: `docker ps --format "{{.Names}}"`
   * Rebuilt everything: `docker-compose up -d --force-recreate --build`
+  
+  * Backup MySQL  `docker exec CONTAINER /usr/bin/mysqldump -u root --password=root DATABASE > backup.sql`
+  * Restore MySql  `cat backup.sql | docker exec -i CONTAINER /usr/bin/mysql -u root --password=root DATABASE`
 
 
 Disclaimer: This project has been generated on phpdocker.io
